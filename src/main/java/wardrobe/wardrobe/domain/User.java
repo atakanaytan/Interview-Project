@@ -30,8 +30,8 @@ public class User {
     private Date create_At;
     private Date update_At;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
-    private List<Product> projects = new ArrayList<>();
+   // @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    //private List<Product> projects = new ArrayList<>();
 
     public User() {
 
@@ -93,14 +93,14 @@ public class User {
         this.update_At = update_At;
     }
 
-    public List<Product> getProjects() {
+  /*  public List<Product> getProjects() {
         return projects;
     }
 
     public void setProjects(List<Product> projects) {
         this.projects = projects;
     }
-
+*/
     @PrePersist
     protected void onCreate() {
         this.create_At = new Date();
