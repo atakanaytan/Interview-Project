@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class CategoryNameException extends RuntimeException{
+public class CategoryNotFoundException extends RuntimeException{
 
-    public CategoryNameException(String message) {
+    public CategoryNotFoundException(String message) {
 
         super(message);
     }

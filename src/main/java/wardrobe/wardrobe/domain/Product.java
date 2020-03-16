@@ -2,7 +2,6 @@ package wardrobe.wardrobe.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @NotBlank(message = "Product name is required")
     private String productName;
@@ -25,15 +24,16 @@ public class Product {
     private String projectDescription;
 
     @NotNull(message = "Product price is required")
-    private double productPrice;
+    private Double productPrice;
 
-    @ManyToOne( fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", updatable = false, nullable = false)
+    @NotNull(message  = "Product quantity is required")
+    private Integer quantity;
+
+    //OneToOne with category
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id", updatable = false, nullable = false)
     @JsonIgnore
     private Category category;
-
-    @NotBlank(message = "Product quantity is required")
-    private int quantity;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     @Column (updatable = false)
@@ -48,13 +48,11 @@ public class Product {
     }
 
     public Long getId() {
-
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-
-        Id = id;
+        this.id = id;
     }
 
     public String getProductName() {
@@ -77,13 +75,11 @@ public class Product {
         this.projectDescription = projectDescription;
     }
 
-    public double getProductPrice() {
-
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
-
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -95,13 +91,11 @@ public class Product {
         this.category = category;
     }
 
-    public int getQuantity() {
-
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -139,4 +133,17 @@ public class Product {
 
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", projectDescription='" + projectDescription + '\'' +
+                ", productPrice=" + productPrice +
+                ", quantity=" + quantity +
+                ", category=" + category +
+                ", created_At=" + created_At +
+                ", updated_At=" + updated_At +
+                '}';
+    }
 }

@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class CategoryNameException extends RuntimeException{
+public class ProductNotFoundException extends RuntimeException{
 
-    public CategoryNameException(String message) {
+    public ProductNotFoundException(String message) {
 
         super(message);
     }
-
 }
