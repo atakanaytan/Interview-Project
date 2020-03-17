@@ -15,4 +15,5 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
     //@Override
     List<Category> findAll();
 
+    boolean existsById(Long categoryId);
 }

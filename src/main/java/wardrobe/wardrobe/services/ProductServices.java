@@ -10,6 +10,8 @@ import wardrobe.wardrobe.exceptions.ProductNotFoundException;
 import wardrobe.wardrobe.repositories.CategoryRepository;
 import wardrobe.wardrobe.repositories.ProductRepository;
 
+import java.util.List;
+
 
 @Service
 public class ProductServices {
@@ -41,13 +43,14 @@ public class ProductServices {
 
 
     //Fetch list of products based on categoryId
-    public Iterable<Product> findProductsByCategoryId (long categoryId) {
+    public List<Product> findProductsByCategoryId (Long categoryId) {
 
-        Category category = categoryRepository.getById(categoryId);
+      //  Category category = categoryRepository.getById(categoryId);
 
-        if (category == null) {
 
-            throw new CategoryNotFoundException("Products related with id: '"+categoryId+"' does not exist");
+       if (!categoryRepository.existsById(categoryId)) {
+
+            throw new CategoryNotFoundException("Could not fetched products with related id: '"+categoryId+"' does not exist");
         }
 
         return productRepository.findProductsByCategory_Id(categoryId);
@@ -94,9 +97,14 @@ public class ProductServices {
 
 
     //Delete Product
-    public void  deleteProduct(long productId) {
+    public void  deleteProduct(Long productId) {
 
         Product product = getProductById(productId);
+
+        if (product == null) {
+
+            throw new ProductNotFoundException("Product Id '"+productId+"' does not exist. Could not deleted.");
+        }
 
         productRepository.delete(product);
     }

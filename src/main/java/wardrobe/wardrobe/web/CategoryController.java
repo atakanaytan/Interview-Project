@@ -65,7 +65,7 @@ public class CategoryController {
      *
      */
     @RequestMapping(value = "/{categoryId}", method = RequestMethod.GET)
-    public Iterable<Product> getProducts(@PathVariable Long categoryId) {
+    public List<Product> getProducts(@PathVariable Long categoryId) {
 
         return productServices.findProductsByCategoryId(categoryId);
     }
