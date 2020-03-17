@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import wardrobe.wardrobe.domain.Category;
 import wardrobe.wardrobe.exceptions.CategoryNameException;
 import wardrobe.wardrobe.repositories.CategoryRepository;
-import wardrobe.wardrobe.repositories.ProductRepository;
+
+import java.util.List;
 
 
 @Service
@@ -35,7 +36,7 @@ public class CategoryServices {
 
         if ((category == null)) {
 
-            throw new CategoryNameException("Category Id'"+categoryId+"' does not exist ");
+            throw new CategoryNameException("Category Id '"+categoryId+"' could not find due to it does not exist ");
         }
 
         return category;
@@ -43,14 +44,14 @@ public class CategoryServices {
 
 
     //Fetch list of categories
-    public Iterable<Category>findAllCategories() {
+    public List<Category> findAllCategories() {
 
         return categoryRepository.findAll();
     }
 
 
     //Delete a category based on given id
-    public void deleteCategoryById (long categoryId) {
+    public void deleteCategoryById (Long categoryId) {
 
         Category category = categoryRepository.getById(categoryId);
 

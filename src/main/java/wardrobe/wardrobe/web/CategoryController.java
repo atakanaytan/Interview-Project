@@ -12,6 +12,7 @@ import wardrobe.wardrobe.services.CategoryServices;
 import wardrobe.wardrobe.services.ProductServices;
 import wardrobe.wardrobe.services.ValidationErrorServices;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -76,7 +77,7 @@ public class CategoryController {
      *
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Iterable<Category> getAllProjects() {
+    public List<Category> getAllProjects() {
 
         return categoryServices.findAllCategories();
     }
