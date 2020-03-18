@@ -39,7 +39,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/{category_id}", method = RequestMethod.POST)
     public ResponseEntity<?> createProduct(@Valid @RequestBody Product product,
-                                              BindingResult result, @PathVariable long category_id) {
+                                              BindingResult result, @PathVariable Long category_id) {
 
       ResponseEntity<?> errorMap = validationErrorServices.ValidationErrorServices(result);
 
@@ -65,7 +65,7 @@ public class ProductController {
      *
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getCategoryById(@PathVariable long productId) {
+    public ResponseEntity<?> getProductById(@PathVariable long productId) {
 
         Product product = productServices.getProductById(productId);
 
@@ -87,7 +87,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.PATCH)
     public ResponseEntity<?> updatedProduct(@Valid @RequestBody Product product, BindingResult result,
-                                            @PathVariable long productId) {
+                                            @PathVariable Long productId) {
 
         ResponseEntity<?> errorMap = validationErrorServices.ValidationErrorServices(result);
 

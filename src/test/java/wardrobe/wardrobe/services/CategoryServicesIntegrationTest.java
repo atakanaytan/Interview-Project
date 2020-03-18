@@ -33,21 +33,6 @@ public class CategoryServicesIntegrationTest {
     }
 
 
-   /* @Test
-    void testFindCategoryById() {
-
-        Category category = new Category();
-        category.setId(1L);
-        category.setName("Test Category");
-
-        List<>result = categoryServices.saveCategory(category);
-
-        assertEquals(categoryServices.findCategoryById(category.getId()), category);
-    }
-
-    */
-
-
    @Test
    public void testFindAllCategories() {
 

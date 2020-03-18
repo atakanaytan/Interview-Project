@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import wardrobe.wardrobe.domain.Category;
 import wardrobe.wardrobe.domain.Product;
+import wardrobe.wardrobe.exceptions.CategoryNotFoundException;
 import wardrobe.wardrobe.exceptions.ProductNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ProductServicesIntegrationTest {
     public void testAddProduct() {
 
         Category category = new Category();
-        category.setName("Test-Product");
+        category.setName("Test-Product-1");
         category.setId(1L);
 
         Category testCategory = categoryServices.saveCategory(category);
@@ -51,45 +52,46 @@ public class ProductServicesIntegrationTest {
         assertTrue(testProduct.getCategory() == testCategory);
     }
 
-
     @Test
     public void testFindProductsByCategoryId() {
 
-        Category category = new Category();
-        category.setName("Test-Product");
-        category.setId(1L);
 
-        Category testCategory = categoryServices.saveCategory(category);
+            Category category = new Category();
+            category.setName("Test-Product");
+            category.setId(1L);
 
-        Product product = new Product();
-        product.setId(1L);
-        product.setProductName("Test-Product");
-        product.setProjectDescription("Test");
-        product.setProductPrice(1.0);
-        product.setQuantity(15);
-        product.setCategory(category);
+            Category testCategory = categoryServices.saveCategory(category);
 
-        Product product2 = new Product();
-        product2.setId(2L);
-        product2.setProductName("Test-Product-2");
-        product2.setProjectDescription("Test-2");
-        product2.setProductPrice(2.0);
-        product2.setQuantity(16);
-        product2.setCategory(category);
+            Product product = new Product();
+            product.setId(1L);
+            product.setProductName("Test-Product");
+            product.setProjectDescription("Test");
+            product.setProductPrice(1.0);
+            product.setQuantity(15);
+            product.setCategory(category);
 
-        List<Product> products = new ArrayList<>();
-        products.add(product);
-        products.add(product2);
+            Product product2 = new Product();
+            product2.setId(2L);
+            product2.setProductName("Test-Product-2");
+            product2.setProjectDescription("Test-2");
+            product2.setProductPrice(2.0);
+            product2.setQuantity(16);
+            product2.setCategory(category);
 
-        testCategory.setProducts(products);
+            List<Product> products = new ArrayList<>();
+            products.add(product);
+            products.add(product2);
 
-        //Need to check database created these instances to fetch products
-        Product testProduct1 = productServices.addProduct(testCategory.getId(), product);
-        Product testProduct2 = productServices.addProduct(testCategory.getId(), product2);
+            testCategory.setProducts(products);
 
-        List<Product> fetchProductsFromCategory =  productServices.findProductsByCategoryId(category.getId());
+            // Need to check database created these instances to fetch products
+            Product testProduct1 = productServices.addProduct(testCategory.getId(), product);
+            Product testProduct2 = productServices.addProduct(testCategory.getId(), product2);
 
-        assertEquals(fetchProductsFromCategory.size(), 2);
+            List<Product> fetchProductsFromCategory = productServices.findProductsByCategoryId(category.getId());
+
+            assertEquals(fetchProductsFromCategory.size(), 2);
+
     }
 
 
@@ -97,7 +99,7 @@ public class ProductServicesIntegrationTest {
     public void getProductById() {
 
         Category category = new Category();
-        category.setName("Test-Product");
+        category.setName("Test-Product-3");
         category.setId(1L);
 
         Category testCategory = categoryServices.saveCategory(category);
@@ -126,7 +128,7 @@ public class ProductServicesIntegrationTest {
     public void updateProjectById() {
 
         Category category = new Category();
-        category.setName("Test-Product");
+        category.setName("Test-Product-4");
         category.setId(1L);
 
         Category testCategory = categoryServices.saveCategory(category);
@@ -160,7 +162,7 @@ public class ProductServicesIntegrationTest {
         Assertions.assertThrows(ProductNotFoundException.class, () -> {
 
         Category category = new Category();
-        category.setName("Test-Product");
+        category.setName("Test-Product-5");
         category.setId(1L);
 
         Category testCategory = categoryServices.saveCategory(category);

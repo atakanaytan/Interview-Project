@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wardrobe.wardrobe.domain.Category;
 import wardrobe.wardrobe.exceptions.CategoryNameException;
+import wardrobe.wardrobe.exceptions.CategoryNotFoundException;
 import wardrobe.wardrobe.repositories.CategoryRepository;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class CategoryServices {
 
         if ((category == null)) {
 
-            throw new CategoryNameException("Category Id '"+categoryId+"' could not find due to it does not exist ");
+            throw new CategoryNotFoundException("Category Id '"+categoryId+"' could not find due to it does not exist ");
         }
 
         return category;
@@ -57,7 +58,7 @@ public class CategoryServices {
 
         if (category == null) {
 
-            throw new CategoryNameException("Category Id '"+categoryId+"' does not exist. Could not deleted.");
+            throw new CategoryNotFoundException("Category Id '"+categoryId+"' does not exist. Could not deleted.");
         }
 
         categoryRepository.delete(category);

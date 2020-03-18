@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wardrobe.wardrobe.domain.Category;
 import wardrobe.wardrobe.domain.Product;
-import wardrobe.wardrobe.exceptions.CategoryNameException;
 import wardrobe.wardrobe.exceptions.CategoryNotFoundException;
 import wardrobe.wardrobe.exceptions.ProductNotFoundException;
 import wardrobe.wardrobe.repositories.CategoryRepository;
@@ -45,11 +44,11 @@ public class ProductServices {
     //Fetch list of products based on categoryId
     public List<Product> findProductsByCategoryId (Long categoryId) {
 
-      //  Category category = categoryRepository.getById(categoryId);
+       Category category = categoryRepository.getById(categoryId);
 
 
-       if (!categoryRepository.existsById(categoryId)) {
-
+      if (!categoryRepository.existsById(categoryId)) {
+       // if (category == null) {
             throw new CategoryNotFoundException("Could not fetched products with related id: '"+categoryId+"' does not exist");
         }
 
@@ -58,7 +57,7 @@ public class ProductServices {
 
 
     //Fetch product based on id
-    public Product getProductById (long productId) {
+    public Product getProductById (Long productId) {
 
         Product product = productRepository.getById((productId));
 
@@ -72,7 +71,7 @@ public class ProductServices {
 
 
     //Update product
-    public Product updateProjectById(Product updatedProduct, long productId){
+    public Product updateProjectById(Product updateProduct, Long productId){
 
         //Parameter updatedProduct does not have categoryId
         //Fetch the product of expected to update
@@ -88,9 +87,9 @@ public class ProductServices {
         Category productsCategoryId = product.getCategory();
 
         //Set the categoryId to updated product
-        updatedProduct.setCategory(productsCategoryId);
+        updateProduct.setCategory(productsCategoryId);
 
-        product = updatedProduct;
+        product = updateProduct;
 
         return productRepository.save(product);
     }

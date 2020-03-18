@@ -14,8 +14,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     Product getById(Long productId);
 
-    Product findCategory_IdById (Long productId);
-
     List<Product> findProductsByCategory_Id(Long categoryId);
 
 }

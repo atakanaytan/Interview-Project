@@ -30,7 +30,7 @@ public class Category {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "category", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category", orphanRemoval = true)
     @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
